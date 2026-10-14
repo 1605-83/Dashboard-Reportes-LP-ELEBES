@@ -29,6 +29,16 @@ a span{font-size:.95rem;color:#6B7280}
 li+li{margin-top:12px}
 .prox{padding:12px 16px;border-radius:10px;border:1px dashed rgba(255,255,255,.45);color:#D5E4FF;font-size:.95rem}
 footer{margin-top:28px;text-align:center;font-size:.8rem;color:#C2D6FF}
+.acceso{max-width:420px;margin:24px auto 0;padding:22px 22px 14px;border:2px solid rgba(255,255,255,.55);border-radius:12px;background:var(--azul2)}
+.acceso label{display:block;margin-bottom:8px;font-weight:700;font-size:1.05rem}
+.acceso .fila{display:flex;gap:8px}
+.acceso input{flex:1;min-width:0;padding:10px 12px;border:0;border-radius:8px;font:inherit;font-size:1rem;color:#1F2328}
+.acceso button,.salir{padding:10px 16px;border:2px solid #fff;border-radius:8px;background:transparent;color:#fff;font:inherit;font-weight:700;cursor:pointer}
+.acceso button:hover{background:rgba(255,255,255,.15)}
+.acceso input:focus-visible,.acceso button:focus-visible,.salir:focus-visible{outline:3px solid var(--claro);outline-offset:2px}
+.error{min-height:1.3em;margin:8px 0 0;color:#FFD1D1;font-weight:700}
+.salir{padding:2px 8px;font-size:.8rem;font-weight:500;border-width:1px}
+[hidden]{display:none!important}
 </style>
 </head>
 <body>
@@ -36,6 +46,14 @@ footer{margin-top:28px;text-align:center;font-size:.8rem;color:#C2D6FF}
   <h1>Dashboard reportes LP - ELEBES</h1>
   <p class="sub">Lago Puelo · Elebes · los tableros se actualizan solos de lunes a viernes a las 7 hs y 13:30 hs</p>
 
+  <!-- acceso con contraseña: frena a quien no la tiene; los tableros siguen siendo publicos con su enlace directo -->
+  <form id="acceso" class="acceso" autocomplete="off">
+    <label for="clave">Contraseña</label>
+    <div class="fila"><input id="clave" type="password" required autofocus aria-describedby="error"><button type="submit">Ingresar</button></div>
+    <p id="error" class="error" role="alert"></p>
+  </form>
+
+  <div id="contenido" hidden>
   <details open>
     <summary>Reportes de ventas</summary>
     <ul>
@@ -82,7 +100,24 @@ footer{margin-top:28px;text-align:center;font-size:.8rem;color:#C2D6FF}
     </ul>
   </details>
 
-  <footer>Datos de la base de Gescom</footer>
+  <footer>Datos de la base de Gescom · <button type="button" id="salir" class="salir">Cerrar sesión</button></footer>
+  </div>
 </div>
+<script>
+// Contraseña del tablero: se compara el hash SHA-256 (la clave no esta escrita en la pagina) y se recuerda en este navegador
+(function(){
+  const HASH = '7ba28c308e535b7ea69deb79859fd71bced89055fa61f511a8b7a308f30a69fd', KEY = 'lpelb-acceso';
+  const $ = id => document.getElementById(id);
+  const abrir = () => { $('acceso').hidden = true; $('contenido').hidden = false; };
+  const sha = async t => [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t)))].map(b => b.toString(16).padStart(2, '0')).join('');
+  try { if (localStorage.getItem(KEY) === HASH) abrir(); } catch (e) {}
+  $('acceso').addEventListener('submit', async e => {
+    e.preventDefault();
+    if (await sha($('clave').value.trim()) === HASH) { try { localStorage.setItem(KEY, HASH); } catch (err) {} abrir(); }
+    else { $('error').textContent = 'Contraseña incorrecta'; $('clave').select(); }
+  });
+  $('salir').addEventListener('click', () => { try { localStorage.removeItem(KEY); } catch (e) {} location.reload(); });
+})();
+</script>
 </body>
 </html>
