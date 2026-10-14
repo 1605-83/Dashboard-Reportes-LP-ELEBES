@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard reportes LP - ELEBES</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--azul:#0B3D91;--azul2:#0F4FB8;--claro:#7FC4FF;--blanco:#fff}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--azul);color:var(--blanco);font-family:Roboto,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.4}
+.wrap{max-width:760px;margin:0 auto;padding:28px 16px 48px}
+h1{margin:0 0 8px;padding:14px 20px;border:3px solid var(--blanco);border-radius:12px;font-size:clamp(1.3rem,4vw,1.9rem);font-weight:900;letter-spacing:.02em;text-align:center}
+.sub{margin:0 0 24px;text-align:center;font-size:.9rem;color:#D5E4FF}
+details{margin:0 0 14px;border:2px solid rgba(255,255,255,.55);border-radius:12px;background:var(--azul2);overflow:hidden}
+summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;font-size:1.15rem;font-weight:700}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:1.5rem;font-weight:500;line-height:1}
+details[open] summary::after{content:"−"}
+summary:focus-visible,a:focus-visible{outline:3px solid var(--claro);outline-offset:2px}
+ul{margin:0;padding:0 12px 12px;list-style:none}
+li+li{margin-top:8px}
+a{display:flex;flex-direction:column;gap:2px;padding:12px 16px;border-radius:10px;background:rgba(255,255,255,.1);color:var(--blanco);text-decoration:none;border:1px solid rgba(255,255,255,.25)}
+a:hover{background:rgba(255,255,255,.2)}
+a b{font-size:1.02rem}
+a span{font-size:.85rem;color:#D5E4FF}
+.prox{padding:12px 16px;border-radius:10px;border:1px dashed rgba(255,255,255,.45);color:#D5E4FF;font-size:.95rem}
+footer{margin-top:28px;text-align:center;font-size:.8rem;color:#C2D6FF}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Dashboard reportes LP - ELEBES</h1>
+  <p class="sub">Lago Puelo · Elebes · los tableros se actualizan solos de lunes a viernes a las 7 hs y 13:30 hs</p>
+
+  <details open>
+    <summary>Reportes de ventas</summary>
+    <ul>
+      <li><a href="https://1605-83.github.io/Reporte-Diario-Ventas/"><b>Reporte de ventas</b><span>Reporte diario LP · ELB: todas las empresas, objetivos, alcance, cobertura y rechazos</span></a></li>
+      <li><a href="https://1605-83.github.io/Ventas-Grupo-Ayudin/"><b>Reporte ventas Ayudin</b><span>Ventas por vendedor y categoría del Grupo Ayudin (Clorox)</span></a></li>
+      <li><a href="https://1605-83.github.io/Ventas-Softys/"><b>Reporte ventas Softys</b><span>Ventas por vendedor y categoría de Softys</span></a></li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>Concursos</summary>
+    <ul>
+      <li><a href="https://1605-83.github.io/concurso-softys/"><b>Concurso Softys</b><span>Cobertura Sussex, Higienol Balance y Babysec</span></a></li>
+      <li><a href="https://1605-83.github.io/Cobertura-Georgalos/"><b>Concurso Georgalos</b><span>Cobertura de barras de cereal y Nutrifood</span></a></li>
+      <li><a href="https://1605-83.github.io/Concurso-Ilolay-Proteinas/"><b>Concurso Ilolay</b><span>Ilolay Proteínas: cobertura por vendedor</span></a></li>
+      <li><a href="https://1605-83.github.io/Concurso-Bic/"><b>Concurso Bic</b><span>Blisters por vendedor y cobertura</span></a></li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>Listas de precios</summary>
+    <ul>
+      <li><div class="prox">Próximamente</div></li>
+    </ul>
+  </details>
+
+  <footer>Datos de la base de Gescom</footer>
+</div>
+</body>
+</html>
