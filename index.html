@@ -55,10 +55,23 @@ footer{margin-top:28px;text-align:center;font-size:.8rem;color:#C2D6FF}
 
   <details>
     <summary>Listas de precios</summary>
-    <ul>
-      <li><a href="https://1605-83.github.io/Lista-Precios-Octubre-2026/"><b>Lista de precios Softys y Clorox</b><span>Octubre 2026 · Lista 1 con IVA: precio por bulto, por unidad y cantidad por pallet</span></a></li>
+    <ul id="listas-precios">
+      <li><a href="https://1605-83.github.io/Lista-Precios-Octubre-2026/"><b>Todas las listas de precios</b><span>Lista 1 con IVA: precio por bulto y por unidad, con buscador</span></a></li>
     </ul>
   </details>
+  <script>
+  // Una tarjeta por cada lista de precios, leida de la pagina de listas: si aparece un proveedor nuevo, aparece su tarjeta
+  (function(){
+    const BASE = 'https://1605-83.github.io/Lista-Precios-Octubre-2026/';
+    const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    const fecha = iso => iso ? iso.split('-').reverse().join('/') : '';
+    fetch(BASE + 'datos.json', {cache:'no-store'}).then(r => r.ok ? r.json() : Promise.reject(r.status)).then(d => {
+      const ul = document.getElementById('listas-precios');
+      ul.insertAdjacentHTML('beforeend', d.listas.map(l =>
+        `<li><a href="${BASE}?p=${encodeURIComponent(l.proveedor)}"><b><i style="display:inline-block;width:.8em;height:.8em;border-radius:3px;margin-right:8px;vertical-align:-.05em;background:#${esc(l.color)}"></i>Lista de precios ${esc(l.nombre)}</b><span>Vigencia ${fecha(l.vigencia)} · ${l.productos.length} productos</span></a></li>`).join(''));
+    }).catch(() => {});
+  })();
+  </script>
 
   <footer>Datos de la base de Gescom</footer>
 </div>
