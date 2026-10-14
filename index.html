@@ -21,10 +21,12 @@ details[open] summary::after{content:"−"}
 summary:focus-visible,a:focus-visible{outline:3px solid var(--claro);outline-offset:2px}
 ul{margin:0;padding:0 12px 12px;list-style:none}
 li+li{margin-top:8px}
-a{display:flex;flex-direction:column;gap:2px;padding:12px 16px;border-radius:10px;background:rgba(255,255,255,.1);color:var(--blanco);text-decoration:none;border:1px solid rgba(255,255,255,.25)}
-a:hover{background:rgba(255,255,255,.2)}
-a b{font-size:1.02rem}
-a span{font-size:.85rem;color:#D5E4FF}
+/* cada acceso: tarjeta blanca, titulo en negrita y descripcion en gris */
+a{display:flex;flex-direction:column;gap:6px;padding:18px 24px;border-radius:12px;background:#fff;color:#1F2328;text-decoration:none;border:1px solid #E5E7EB;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+a:hover{box-shadow:0 4px 14px rgba(0,0,0,.25)}
+a b{font-size:1.1rem;font-weight:700;color:#1F2328}
+a span{font-size:.95rem;color:#6B7280}
+li+li{margin-top:12px}
 .prox{padding:12px 16px;border-radius:10px;border:1px dashed rgba(255,255,255,.45);color:#D5E4FF;font-size:.95rem}
 footer{margin-top:28px;text-align:center;font-size:.8rem;color:#C2D6FF}
 </style>
